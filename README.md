@@ -73,6 +73,11 @@ DeterminateSystems actions; no other third-party actions are permitted.
 [`Mic92/hestia`](https://github.com/Mic92/hestia) is an accepted exception and
 could be wired in later for a shared binary cache, but it is not currently used.
 
+[`.github/workflows/flake-health.yml`](.github/workflows/flake-health.yml) runs
+weekly and fails (triggering a GitHub notification) once `flake.nix` points at an
+unsupported NixOS branch, which is the signal that `nixos-26.05` has reached end
+of life and the flake should move to the next stable branch.
+
 x86_64 builds run on `ubuntu-latest`; aarch64 builds run natively on GitHub's
 arm64 runner `ubuntu-24.04-arm`. **Native ARM runners are only free for public
 repositories.** For a private repository, replace the aarch64 matrix `runner`

@@ -1,0 +1,22 @@
+name: Nix Flake Health
+
+on:
+  schedule:
+    # 3AM, Sunday.
+    - cron: "0 3 * * 0"
+  workflow_dispatch:
+
+jobs:
+  flake-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Determinate Nix has flakes enabled by default.
+      - uses: DeterminateSystems/determinate-nix-action@v3
+
+      - uses: actions/checkout@v7
+
+      # Fail (and thus notify) once flake.nix points at an unsupported NixOS
+      # branch, i.e. once nixos-26.05 reaches end of life.
+      - name: flake-checker supported
+        run: nix run nixpkgs#flake-checker -- --nixpkgs-keys nixpkgs --no-telemetry --fail-mode --check-supported
