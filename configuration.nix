@@ -29,6 +29,8 @@ in
     "flakes"
   ];
 
+  zramSwap.enable = true;
+
   environment.systemPackages = with pkgs; [
     mg
     iroh-ssh
