@@ -36,4 +36,14 @@ in
 
   users.users.root.openssh.authorizedKeys.keys = trustedKeys;
   users.users.nixos.openssh.authorizedKeys.keys = trustedKeys;
+
+  # Some VM providers hand out no DHCP/SLAAC, leaving DNS unconfigured. Pin
+  # Quad9 as a static fallback.
+  # https://www.quad9.net/service/service-addresses-and-features/
+  networking.nameservers = [
+    "9.9.9.10"
+    "149.112.112.10"
+    "2620:fe::10"
+    "2620:fe::fe:10"
+  ];
 }
