@@ -22,6 +22,13 @@ in
   # definition (priority 1000) loses; force it to make the images identifiable.
   isoImage.edition = lib.mkForce "tom";
 
+  # Make `nix` usable out of the box on the installed system, without relying
+  # on the NIX_CONFIG environment variable.
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
   environment.systemPackages = with pkgs; [
     mg
     iroh-ssh
