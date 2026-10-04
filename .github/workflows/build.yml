@@ -1,0 +1,71 @@
+name: build
+
+on:
+  schedule:
+    # Monthly, 03:00 UTC on the 1st.
+    - cron: "0 3 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: installer-x86_64
+            runner: ubuntu-latest
+          # Native arm64 GitHub-hosted runner (requires a public repo to be free).
+          - name: installer-aarch64
+            runner: ubuntu-24.04-arm
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v7
+      # Determinate Nix has flakes enabled by default; no extra cache config.
+      # (Mic92/hestia is a permitted action if a binary cache is ever wanted.)
+      - uses: DeterminateSystems/determinate-nix-action@v3
+      - name: Build ISO
+        run: nix build ".#nixosConfigurations.${{ matrix.name }}.config.system.build.isoImage" -L
+      - name: Stage ISO
+        run: |
+          mkdir -p staging
+          cp result/iso/*.iso staging/
+      - uses: actions/upload-artifact@v7
+        with:
+          name: ${{ matrix.name }}
+          path: staging/*.iso
+          if-no-files-found: error
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          path: staging
+          merge-multiple: true
+      - name: Compute date tag
+        id: tag
+        run: echo "tag=$(date -u +%Y-%m)" >> "$GITHUB_OUTPUT"
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ steps.tag.outputs.tag }}
+        run: |
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            # Re-run in the same month: overwrite the existing release assets.
+            gh release upload "$TAG" staging/*.iso --clobber
+          else
+            gh release create "$TAG" --title "$TAG" --generate-notes staging/*.iso
+          fi
+      - name: Prune to at most 3 releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh release list --limit 100 --json tagName,createdAt \
+            --jq 'sort_by(.createdAt) | reverse | .[3:] | .[].tagName' \
+          | while read -r tag; do [ -n "$tag" ] && gh release delete "$tag" --yes --cleanup-tag; done

@@ -1,0 +1,12 @@
+# One-time snapshot of https://github.com/tomfitzhenry.keys
+# Refresh with:  curl -s https://github.com/tomfitzhenry.keys
+[
+  "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIN3Je4I0D9gf6krw+HhM5X0Fdg1sq5bf3VDvLBDxZ3XAAAAABHNzaDo="
+  "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIA13oQrkygCx4G9HVeIjdItLtpZUmS2ICjMfmD0GPeGjAAAABHNzaDo="
+  "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAICpd1nSXGyN375CCLYmHH3VvhsqRTTJO3eS2vdBL/702AAAABHNzaDo="
+  "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBOQ7vhVrGKDQWdAqZCqJW7pNUNc1GODnzNBd8n27nUqGa+DuuLszyi8QDUaGwE0MdYYjQba4R4lF4j3cU7S65lE="
+  "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBGUYYx2b7mHdXTxbnHh3euAUNyn+8aC2J2kOCUmp+JjbwipmjH3MbDjwjCvO7Z89wgVFmw0mL4y7EWucNaZqbKQ="
+  "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBG4EZzdLctcO959FAldN7U/PH7XOXzrEhmFnZ7+tM2rcV5j/UlRHEUGbFtD6zWrhVinTOcSDVgWXQtq4UJ/DRio="
+  "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMjfdiiVUpyUcJm9U30ixEI4dXR03M7vWioDkHaKd0sk"
+  "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO2ywE8hrK6BZyW9E3B5da4/tSJKaUZYcnjaWH6Pp2Jp"
+]
