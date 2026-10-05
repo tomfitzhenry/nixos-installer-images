@@ -1,7 +1,7 @@
 # nixos-installer-images
 
-Personalized NixOS installer ISOs for `x86_64-linux` and `aarch64-linux` that
-behave like the stock minimal installer, but:
+Personalized NixOS installer ISOs for `x86_64-linux`, `aarch64-linux` and
+`armv7l-linux` that behave like the stock minimal installer, but:
 
 - include [`mg`](https://github.com/hboetes/mg) and
   [`iroh-ssh`](https://github.com/n0-computer/iroh-ssh),
@@ -23,6 +23,9 @@ nix build .#nixosConfigurations.installer-x86_64.config.system.build.isoImage
 
 # aarch64 (requires aarch64 builder or binfmt emulation)
 nix build .#nixosConfigurations.installer-aarch64.config.system.build.isoImage
+
+# armv7l (requires an armv7l builder or binfmt emulation)
+nix build .#nixosConfigurations.installer-armv7l.config.system.build.isoImage
 ```
 
 The ISO lands in `result/iso/*.iso`, and its exact name can be inspected with:
