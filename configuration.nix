@@ -71,6 +71,7 @@ in
     flashrom
     mg
     iroh-ssh
+    tmux
   ];
 
   users.users.root.openssh.authorizedKeys.keys = trustedKeys;
