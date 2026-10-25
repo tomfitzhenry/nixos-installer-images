@@ -71,7 +71,6 @@ in
     flashrom
     mg
     iroh-ssh
-    zmx
   ];
 
   users.users.root.openssh.authorizedKeys.keys = trustedKeys;
