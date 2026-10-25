@@ -62,8 +62,11 @@ in
   zramSwap.enable = true;
 
   environment.systemPackages = with pkgs; [
+    coreboot-utils
+    flashrom
     mg
     iroh-ssh
+    zmx
   ];
 
   users.users.root.openssh.authorizedKeys.keys = trustedKeys;
