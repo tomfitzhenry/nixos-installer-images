@@ -61,6 +61,11 @@ in
 
   zramSwap.enable = true;
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelParams =
+    [ "earlycon" ]
+    ++ lib.optionals pkgs.stdenv.hostPlatform.isx86 [ "acpi=spcr" ];
+
   environment.systemPackages = with pkgs; [
     coreboot-utils
     flashrom
